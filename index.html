@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SWE Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SWE Project | Group Repository</title>
   <style>
     :root {
       --sage: #A5C89E;
@@ -11,164 +11,474 @@
       --lime: #D8E983;
       --olive: #AEB877;
       --text: #2f3a2f;
-      --white: rgba(255, 255, 255, 0.8);
+      --card: rgba(255, 255, 255, 0.72);
+      --border: rgba(47, 58, 47, 0.12);
+      --shadow: 0 12px 30px rgba(47, 58, 47, 0.12);
+      --radius: 22px;
+      --max-width: 1120px;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      background: linear-gradient(to bottom, var(--sage), var(--cream), var(--lime), var(--olive));
+      background:
+        linear-gradient(180deg, var(--sage) 0 24%, var(--cream) 24% 50%, var(--lime) 50% 74%, var(--olive) 74% 100%);
+      min-height: 100vh;
       line-height: 1.6;
     }
 
+    .overlay {
+      background: rgba(255, 255, 255, 0.22);
+      min-height: 100vh;
+      padding: 32px 20px 64px;
+    }
+
     .container {
-      max-width: 1000px;
+      max-width: var(--max-width);
       margin: 0 auto;
-      padding: 40px 20px;
     }
 
-    .card {
-      background: var(--white);
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
     }
 
-    h1, h2 {
+    .brand {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.55);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.55);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.82);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-card,
+    .info-card,
+    .section-card,
+    .member-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 36px;
+    }
+
+    .hero-card h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.05;
+    }
+
+    .hero-card p {
+      margin: 0 0 20px;
+      font-size: 1.05rem;
+      max-width: 60ch;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      padding: 12px 18px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: white;
+      transition: 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.alt {
+      background: rgba(255,255,255,0.45);
+    }
+
+    .info-card {
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .mini-block {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.52);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+    }
+
+    .mini-block h3 {
+      margin: 0 0 6px;
+      font-size: 1rem;
+    }
+
+    .mini-block p {
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 24px;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .span-12 { grid-column: span 12; }
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
+    .span-6 { grid-column: span 6; }
+    .span-4 { grid-column: span 4; }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 1.6rem;
+    }
+
+    .section-card p {
       margin-top: 0;
     }
 
-    .tag {
-      display: inline-block;
-      background: white;
-      padding: 8px 14px;
-      margin: 6px 6px 0 0;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .team-grid {
+    .outcomes,
+    .skills,
+    .content-list,
+    .info-list {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 12px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
     }
 
-    @media (max-width: 700px) {
-      .team-grid {
+    .outcomes li,
+    .skills li,
+    .content-list li,
+    .info-list li {
+      background: rgba(255,255,255,0.48);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+
+    .members {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .member-card {
+      padding: 22px;
+    }
+
+    .member-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    .member-role {
+      display: inline-block;
+      margin-bottom: 12px;
+      background: var(--cream);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    .course-facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .fact {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .fact strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    footer {
+      margin-top: 28px;
+      padding: 22px 10px 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: rgba(47, 58, 47, 0.9);
+    }
+
+    @media (max-width: 920px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .span-7,
+      .span-5,
+      .span-6,
+      .span-4 {
+        grid-column: span 12;
+      }
+
+      .members,
+      .course-facts {
         grid-template-columns: 1fr;
       }
     }
 
-    a {
-      color: inherit;
+    @media (max-width: 640px) {
+      .hero-card,
+      .info-card,
+      .section-card,
+      .member-card {
+        padding: 20px;
+      }
+
+      .hero-card h1 {
+        font-size: 2rem;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="overlay">
+    <div class="container">
+      <header class="topbar">
+        <div class="brand">SWE Project</div>
+        <nav class="nav">
+          <a href="#team">Team</a>
+          <a href="#course">Course</a>
+          <a href="#outcomes">Learning Outcomes</a>
+          <a href="#content">Content</a>
+        </nav>
+      </header>
 
-    <div class="card">
-      <h1>SWE Project</h1>
-      <p>
-        This repository presents our group work for a Software Engineering course.
-        It documents our collaboration, course information, and project setup using GitHub and GitHub Pages.
-      </p>
-
-      <div>
-        <span class="tag">Git</span>
-        <span class="tag">GitHub</span>
-        <span class="tag">Documentation</span>
-        <span class="tag">Team Collaboration</span>
-        <span class="tag">GitHub Pages</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>About Us</h2>
-      <div class="team-grid">
-        <div>
-          <h3>Evgeniia Makhalina</h3>
+      <section class="hero">
+        <div class="hero-card">
+          <h1>Software Engineering Project</h1>
           <p>
-            Computer Science and Information Technology student with experience in web development,
-            databases, UX flows, Git/GitHub, React, JavaScript, SQL, and project coordination.
+            This repository documents our collaborative course project setup, teamwork, and development progress.
+            It serves as both a technical workspace and a public project page for our Software Engineering course.
           </p>
+
+          <div class="badge-row">
+            <span class="badge">Version Control</span>
+            <span class="badge">Documentation</span>
+            <span class="badge">GitHub Pages</span>
+            <span class="badge">Team Collaboration</span>
+          </div>
+
+          <div class="cta-row">
+            <a class="btn" href="https://github.com/evgeniia-dev/swe-project" target="_blank" rel="noopener">View Repository</a>
+            <a class="btn alt" href="#course">Course Information</a>
+          </div>
         </div>
-        <div>
-          <h3>Musa Keita Jaiteh</h3>
+
+        <aside class="info-card">
+          <div class="mini-block">
+            <h3>Language</h3>
+            <p>Finnish</p>
+          </div>
+          <div class="mini-block">
+            <h3>Level</h3>
+            <p>Intermediate Studies</p>
+          </div>
+          <div class="mini-block">
+            <h3>Subject</h3>
+            <p>Computer Science</p>
+          </div>
+          <div class="mini-block">
+            <h3>Grading Scale</h3>
+            <p>0–5</p>
+          </div>
+        </aside>
+      </section>
+
+      <main class="grid">
+        <section class="section-card span-12" id="team">
+          <h2 class="section-title">Our Team</h2>
           <p>
-            Computer Science student with an interest in technology, operations, teamwork,
-            structured workflows, and continuous learning.
+            We are building this project as part of a software engineering course focused on collaboration,
+            documentation, project structure, and practical development from project order to tested software.
           </p>
-        </div>
-      </div>
-    </div>
 
-    <div class="card">
-      <h2>Learning Outcomes</h2>
-      <ul>
-        <li>Define project requirements in more detail from the point of view of feasibility analysis</li>
-        <li>Understand the specifics of managing large-scale project entities</li>
-        <li>Apply appropriate leadership practices throughout the project life cycle</li>
-        <li>Manage documentation</li>
-      </ul>
-    </div>
+          <div class="members">
+            <article class="member-card">
+              <h3>Evgeniia Makhalina</h3>
+              <span class="member-role">Computer Science / IT Student</span>
+              <p>
+                Background in web development, database work, UX flows, Git/GitHub, React, JavaScript, SQL,
+                and project coordination. Brings both technical and operational experience into the team.
+              </p>
+            </article>
 
-    <div class="card">
-      <h2>Generic Skills</h2>
-      <ul>
-        <li>Digitalization</li>
-        <li>Leadership and development</li>
-        <li>Critical thinking</li>
-        <li>Identifying and developing your own expertise</li>
-        <li>Communication skills</li>
-        <li>Social skills</li>
-      </ul>
-    </div>
+            <article class="member-card">
+              <h3>Musa Keita Jaiteh</h3>
+              <span class="member-role">Computer Science Student</span>
+              <p>
+                Interested in technology and continuous learning, with experience in logistics, operations,
+                structured workflows, communication, and teamwork in fast-paced environments.
+              </p>
+            </article>
+          </div>
+        </section>
 
-    <div class="card">
-      <h2>Course Content</h2>
-      <ul>
-        <li>Feasibility analysis and its application to software and information system projects</li>
-        <li>Extensive projects and working in a multi-project organization</li>
-        <li>Leadership practices during the life cycle of the project</li>
-        <li>Documentation in projects</li>
-        <li>Running project from the beginning (project order) until the tested software</li>
-      </ul>
-    </div>
+        <section class="section-card span-7" id="course">
+          <h2 class="section-title">Course Overview</h2>
+          <p>
+            This study unit focuses on software and information system projects from a wider project-management
+            perspective. The course connects feasibility analysis, leadership, documentation, and lifecycle
+            thinking with the practical work of building tested software.
+          </p>
 
-    <div class="card">
-      <h2>Course Information</h2>
-      <p><strong>Prerequisites:</strong> Design of information systems, Programming II, Data management and databases (SQL)</p>
-      <p><strong>Grading scale:</strong> 0–5</p>
-      <p><strong>Language:</strong> Finnish</p>
-      <p><strong>Level:</strong> Intermediate Studies</p>
-      <p><strong>Subject:</strong> Computer Science</p>
-    </div>
+          <div class="course-facts">
+            <div class="fact">
+              <strong>Prerequisites</strong>
+              Design of Information Systems, Programming II, Data Management and Databases (SQL)
+            </div>
+            <div class="fact">
+              <strong>Programmes</strong>
+              Bachelor and Master level programmes in Computer Science, Information Technology, Informatics, minor and additional studies
+            </div>
+          </div>
+        </section>
 
-    <div class="card">
-      <h2>Programmes</h2>
-      <ul>
-        <li>Bachelor of Science (Computer Science) 2023–2024</li>
-        <li>Bachelor of Science Degree Programme in Information Technology (IBPIT)</li>
-        <li>Luonnontieteiden kandidaatti (tietojenkäsittelytieteen aineenopettaja) 2018–20</li>
-        <li>Bachelor of Science (Computer Science, Subject Teacher) 2023</li>
-        <li>Master's Degree Programme in Health and Human Services Informatics 2023–24</li>
-        <li>Computer Science, Minor Studies</li>
-        <li>Additional Studies (MSc)</li>
-      </ul>
-    </div>
+        <section class="section-card span-5">
+          <h2 class="section-title">Practical Focus</h2>
+          <ul class="info-list">
+            <li>Managing project work from project order to tested software</li>
+            <li>Working with documentation throughout the full project life cycle</li>
+            <li>Understanding large-scale and multi-project environments</li>
+            <li>Combining technical work with leadership and communication</li>
+          </ul>
+        </section>
 
+        <section class="section-card span-6" id="outcomes">
+          <h2 class="section-title">Learning Outcomes</h2>
+          <ul class="outcomes">
+            <li>Define project requirements in more detail from the perspective of feasibility analysis</li>
+            <li>Understand the specifics of managing large-scale project entities</li>
+            <li>Apply appropriate leadership practices throughout the project life cycle</li>
+            <li>Manage project documentation effectively</li>
+          </ul>
+        </section>
+
+        <section class="section-card span-6">
+          <h2 class="section-title">Generic Skills</h2>
+          <ul class="skills">
+            <li>Digitalization</li>
+            <li>Leadership and development</li>
+            <li>Critical thinking</li>
+            <li>Identifying and developing your own expertise</li>
+            <li>Communication skills</li>
+            <li>Social skills</li>
+          </ul>
+        </section>
+
+        <section class="section-card span-12" id="content">
+          <h2 class="section-title">Course Content</h2>
+          <ul class="content-list">
+            <li>Feasibility analysis and its application to software and information system projects</li>
+            <li>Extensive projects and working in a multi-project organization</li>
+            <li>Leadership practices during the life cycle of the project</li>
+            <li>Documentation in projects</li>
+            <li>Running a project from the beginning, from project order until the tested software</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>SWE Project • University Course Repository • Built with Git, GitHub, and GitHub Pages</p>
+      </footer>
+    </div>
   </div>
 </body>
 </html>
